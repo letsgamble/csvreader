@@ -5,9 +5,10 @@ import os
 csv_file_path = sys.argv[1]
 csv_save_path = sys.argv[2]
 
-row = int(sys.argv[3])
-column = int(sys.argv[4])
-value = sys.argv[5]
+argv_list = sys.argv[3:]
+
+row_column_value = []
+row_column_values = []
 
 memory = []
 
@@ -18,9 +19,17 @@ if os.path.exists(csv_file_path):
 			for line in reader:
 				print(" ".join(line))
 				memory.append(line)
-			print(memory[row][column])
+			for element in argv_list:
+				row_column_value.append(element)
+				if len(row_column_value) == 3:
+					row_column_values.append(row_column_value)
+					row_column_value = []
+			for list in row_column_values:
+				print(list)
+			row = int(row_column_values[0][0])
+			column = int(row_column_values[0][1])
+			value = row_column_values[0][2]
 			memory[row][column] = value
-			print(memory[row][column])
 	else:
 		print("Your file path leads to the catalog, it should point to a file instead.")
 		print("Below there is a list of your current directory contents:")
@@ -37,12 +46,3 @@ with open(csv_save_path, "w", newline="", encoding='UTF8') as f2:
 	for line in memory:
 		writer.writerow(line)
 	print(f"File successfully saved to {csv_save_path}")
-
-
-# while True:
-# 	print(change)
-# 	X += 3
-# 	Y += 3
-# 	change = sys.argv[X:Y]
-# 	print(change)
-# 	break
