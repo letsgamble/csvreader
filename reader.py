@@ -24,12 +24,11 @@ if os.path.exists(csv_file_path):
 				if len(row_column_value) == 3:
 					row_column_values.append(row_column_value)
 					row_column_value = []
-			for list in row_column_values:
-				print(list)
-			row = int(row_column_values[0][0])
-			column = int(row_column_values[0][1])
-			value = row_column_values[0][2]
-			memory[row][column] = value
+			for list_them in row_column_values:
+				for line in row_column_values:
+					row = int(line[0])
+					column = int(line[1])
+					memory[row][column] = line[2]
 	else:
 		print("Your file path leads to the catalog, it should point to a file instead.")
 		print("Below there is a list of your current directory contents:")
@@ -37,9 +36,7 @@ if os.path.exists(csv_file_path):
 else:
 	print("There is no such catalog or file with this name")
 
-
 print('')
-
 
 with open(csv_save_path, "w", newline="", encoding='UTF8') as f2:
 	writer = csv.writer(f2)
