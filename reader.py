@@ -54,16 +54,16 @@ class FileChecker:
 			self.memory.append(line)
 		for element in self.argv_list:
 			self.row_column_value.append(element)
-			if len(self.row_column_value) == 3:
-				self.row_column_values.append(self.row_column_value)
-				self.row_column_value = []
+			self.row_column_values.append(self.row_column_value)
 		for line in self.row_column_values:
-			row = int(line[0])
-			column = int(line[1])
-			self.memory[row][column] = line[2]
-			print('Outcome after changes:')
-			for another_line in self.memory:
-				print(another_line)
+			for _line in line:
+				_line = str(_line).split(",")
+				row = int(_line[0])
+				column = int(_line[1])
+				self.memory[row][column] = _line[2]
+		print('Outcome after changes:')
+		for line in self.memory:
+			print(line)
 
 	def file_saver(self):
 		if self.dst_file_type == 'csv':
